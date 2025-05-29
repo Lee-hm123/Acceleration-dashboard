@@ -3,16 +3,8 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QGraphicsEllipseItem, QGraphicsLineItem
 import pyqtgraph as pg
 
-'''
-可增加：
-重新标定
-此次活动的最大g值
-
-'''
-
-
-PORT = 'COM4'
-BAUD = 115200
+PORT = 'COM4'  #使用的串口号
+BAUD = 115200  #串口波特率
 
 class SerialThread(QtCore.QThread):
     new_data = QtCore.pyqtSignal(float, float, float)
@@ -23,15 +15,16 @@ class SerialThread(QtCore.QThread):
         self._running = True
 
     def run(self):
-        acc_pattern = re.compile(r'\[ACC\]\s+X=(-?\d+)mg\s+Y=(-?\d+)mg\s+Z=(-?\d+)mg')
+        acc_pattern = re.compile(r'\[ACC\]\s+X=(-?\d+)mg\s+Y=(-?\d+)mg\s+Z=(-?\d+)mg')#匹配串口格式
+        # 主循环：只要 _running 为 True，就持续读取串口数据
         while self._running:
-            line = self.ser.readline().decode(errors='ignore')
-            m = acc_pattern.search(line)
+            line = self.ser.readline().decode(errors='ignore') # 读取一行串口数据，解码成字符串，忽略非法字符
+            m = acc_pattern.search(line) # 使用正则表达式提取加速度数据
             if m:
-                ax = int(m.group(1)) / 1000
+                ax = int(m.group(1)) / 1000  # 提取三个方向的加速度（单位为 mg），转换为 g
                 ay = int(m.group(2)) / 1000
                 az = int(m.group(3)) / 1000
-                self.new_data.emit(ax, ay, az)
+                self.new_data.emit(ax, ay, az)  # 通过信号将 ax, ay, az 发给主线程进行 UI 更新
 
     def stop(self):
         self._running = False
