@@ -36,21 +36,23 @@
 
 1. 使用 STM32 F103C8T6开发板连接 MPU6050 传感器，并通过串口将数据发送至电脑（如 COM4）。
 
-2. 确保 Python 环境安装 PyQt5 与 pyqtgraph：
+2. 打开文件夹`MPU6050`中的Keil项目编译下载到STM32F103C8T6。
+
+3. 确保 Python 环境安装 PyQt5 与 pyqtgraph：
 
    ```bash
    pip install pyqt5 pyqtgraph numpy
    ```
 
-3. 修改程序中的串口号 `PORT = 'COM4'` 为你的实际串口号。
+4. 修改程序中的串口号 `PORT = xxx ` 为你的实际串口号，本项目默认波特率为115200。
 
-4. 运行 Python 程序：
+5. 运行 Python 程序：
 
    ```bash
-   python G_meter_dashboard.py
+   python 加速度仪表盘.py
    ```
 
-5. 启动后将自动显示仪表盘窗口并开始接收串口数据。
+6. 启动后将自动显示仪表盘窗口并开始接收串口数据。
 
 ------
 
@@ -77,6 +79,8 @@
 ------
 
 ## 📷 使用效果示意图
+
+
 
 ![屏幕截图 2025-05-29 233902](https://github.com/user-attachments/assets/34e0ae8f-6384-4366-92c7-ddf404fa38fc)
 
