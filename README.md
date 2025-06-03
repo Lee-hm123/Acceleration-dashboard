@@ -97,8 +97,7 @@
 ├── system/
 │   └── Delay.c / .h       // 微秒/毫秒级延时函数
 ```
-
-## 
+----
 
 ### 📡 Serial 串口通信模块
 
@@ -117,6 +116,8 @@
 | `Serial_ReceiveByte(void)`（可选）             | 函数           | 接收一个串口字节（若你实现了接收功能）。                     |
 | `USART1_IRQHandler(void)`（可选）              | 中断函数       | 若开启串口中断接收，需编写的 USART1 中断服务函数。           |
 | `Serial_SetCallback(void (*func)(uint8_t))`    | 函数           | 注册串口接收回调函数，用于中断接收模式下处理数据。           |
+
+----
 
 ### 📦 MPU6050（传感器）
 
